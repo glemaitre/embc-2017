@@ -1,0 +1,103 @@
+\section{Methodology}\label{sec:chp6:method}
+
+The \ac{mpmri} data are acquired from a cohort of patients with higher-than-normal level of \ac{psa}.
+The acquisition is performed using a \SI{3}{\tesla} whole body \ac{mri} scanner (Siemens Magnetom Trio TIM, Erlangen, Germany) using sequences to obtain \ac{t2w}-\ac{mri}, \ac{dce}-\ac{mri}, \ac{dw}-\ac{mri}, and \ac{mrsi}.
+Aside of the \ac{mri} examination, these patients also have undergone a guided-biopsy.
+The dataset is composed of a total of 19 patients of which 17 patients have biopsy proven \ac{cap} and 2 patients are ``healthy'' with negative biopsies.
+From those 17, 12 patients have a \ac{cap} in the \ac{pz}, 3 patients have \ac{cap} in the \ac{cg}, 2 patients have invasive \ac{cap} in both \ac{pz} and \ac{cg}.
+An experienced radiologist has segmented the prostate organ --- on \ac{t2w}-\ac{mri}, \ac{dce}-\ac{mri}, and \ac{adc}-\ac{mri} --- as well as the prostate zones --- i.e., \ac{pz} and \ac{cg} ---, and \ac{cap} on the \ac{t2w}-\ac{mri}.
+
+The full description as well as the data set can be found at ~\cite{Lemaitre2016thesis}  and are also available through the \acs{iccvb} website.
+
+
+
+Our \ac{mpmri} \ac{cad} system consists of seven different steps: pre-processing, segmentation, registration, feature detection, feature balancing, feature selection/extraction, and finally classification.
+%% It should be noted that \ac{cad} system designed deals with multiparametric \ac{mri} data. 
+
+\subsection{Pre-processing}\label{subsec:chp6:method:PP}
+
+Three types of pre-processing are used for \ac{mri} images: (i) noise filtering, (ii) bias correction, and (iii) standardization/normalization.
+Normalization is, a crucial step to reduce the inter-patient variations which allows to improve the learning during the classification stage.
+ Normalization to pre-process \ac{t2w}-\ac{mri} was done following the method ~\cite{lemaitre2016normalization} and \ac{dce}-\ac{mri} using ~\cite{Lemaitre2016thesis}.
+Regarding the \ac{adc} map normalization, the \ac{pdf} within the prostate does not follow a known distribution and thus one cannot use a parametric model to normalize these images and a non-parametric piecewise-linear normalization~\cite{Nyul2000} is the best option for this case.
+The \ac{mrsi} modality has been pre-processed to correct the phase, baseline, and frequency ~\cite{Lemaitre2016thesis}.
+
+
+\subsection{Segmentation and registration}\label{subsec:chp6:method:Seg-Reg}
+
+For this work, no segmentation method has been developed and the manual segmentation given by our radiologist has been used.
+The prostate is suffering, however, from a misalignment between the different \ac{mri} modalities.
+Therefore, three registrations have been developed to: (i) the patient motion during the \ac{dce}-\ac{mri} acquisition, (ii) the patient motion between the \ac{t2w}-\ac{mri} and the \ac{dce}-\ac{mri} acquisitions, and (iii) the patient motion between the \ac{t2w}-\ac{mri} and the \ac{adc} map acquisition.
+
+
+
+\subsection{Feature detection}\label{subsec:chp6:method:fea-det}
+
+%\begin{table}
+ % \caption{Features extracted in \acs*{t2w}-\acs*{mri} and \acs*{adc} volumes.}
+ % \centering
+ % \scriptsize
+ % \begin{tabularx}{\textwidth}{lXc}
+   % \toprule
+    %\textbf{Features} & \textbf{Parameters} & \textbf{\# dimensions} \\
+%    \midrule
+ %   Intensity &  & 1 \\
+  %  \acs*{dct} decomposition & window: \SI[product-units=repeat]{9x9x3}{\px} & 243 \\
+   %%Laplacian filter &  & 1 \\
+ %   Prewitt filter &  & 3 \\
+  %  Scharr filter &  & 3 \\
+   % Sobel filter &  & 3 \\
+    %Gabor filters & 4 frequencies $f \in [0.05, 0.25]$; 4 azimuth angles $\alpha \in [0, \pi]$; 8 elevation angles $\alpha \in [0, 2\pi]$ & 256 \\
+%    Phase congruency filter & 5 orientations; 6 scales & 3 \\
+ %   Haralick filter & window: \SI[product-units=repeat]{9x9x3}{\px}; \# grey levels: 8; distance: \SI{1}{\px}; 13 directions & 169 \\
+  %  \acs*{lbp} filter & 2 radii $r=\{1, 2\}$; 2 neighborhood sizes $N = \{8, 16\}$ & 6 \\
+  %  \bottomrule
+ % \end{tabularx}
+  %\label{tab:featureadct2w}
+%\end{table}
+
+
+
+\paragraph{\ac{t2w}-\ac{mri} and \ac{adc} map features}
+Apart of using the normalized intensity, edge- and texture-based features are commonly extracted from \ac{t2w}-\ac{mri} and \ac{adc} map.
+The following set of filters characterizing edges have been used: (i) Kirsch, (ii) Laplacian, (iii) Prewitt, (iv) Scharr, (v) Sobel, and (vi) Gabor.
+Apart of Kirsch filter, the other filters are applied in 3D to get more information using a volume and not a slice, as it is usually done.
+Additionally, features based on phase congruency are computed~\cite{kovesi1999image}.
+
+To characterize the local texture, both second-order \ac{glcm}-based features~\cite{Haralick1973} and rotation invariant and uniform \ac{lbp}~\cite{ojala2002multiresolution} are extracted.
+To encode 3D information, the 13 first Haralick features are computed for the 13 possible directions.
+For the same reason, the \ac{lbp} codes are computed for the three-orthogonal-planes of each \ac{mri} volume.
+
+Note that all these features are extracted at each voxel of the volume.
+
+\paragraph{\ac{dce}-\ac{mri} features} 
+In brief, the entire enhanced signal, semi-quantitative, and quantitative methods are computed. 
+\paragraph{\ac{mrsi} features} 
+Three different techniques ~\cite{Parfait2012} are used to extract discriminative features: (i) relative quantification based on metabolite quantification, (ii) relative quantification based on bounds integration, and (iii) spectra extraction ~\cite{Lemaitre2016thesis} .
+
+\paragraph{Anatomical features}
+
+4 different metrics are computed based on the relative distance to the prostate boundary as well as the prostate center, and the relative position in the Euclidean and cylindrical coordinate systems ~\cite{Chen2002,Litjens2014}.
+
+\subsection{Feature balancing}\label{subsec:chp6:method:fea-bal}
+ solving the problem of imbalanced is equivalent to under- or over-sampling part of the dataset to obtain equal number of samples in the different classes.
+We used several methods and selected the most efficient for our dataset ~\cite{Lemaitre2016thesis}
+
+
+\subsection{Feature selection and extraction}\label{subsec:chp6:method:fea-sel}
+
+Feature selection and extraction are used in the experiment: (i) signal-based data --- i.e., \ac{mrsi} and \ac{dce}-\ac{mri} --- are decomposed using feature extraction methods while (ii) image-based features are selected through different feature selection methods.
+
+Among those, \ac{pca}, sparse-\ac{pca}, and \ac{ica} are used to decompose signal-based data.
+
+Additionally to feature extraction, two methods of feature selection were used during the experiments.
+The first feature selection is the one-way \ac{anova} test whereas the second is based on the Gini importance obtained while building our \ac{rf} classifiers.
+
+\subsection{Classification}\label{subsec:chp6:method:clas}
+
+\ac{rf} has been chosen as our base classifier --- allowing for feature selection as well --- to perform classification of individual modality as well as the combination of modalities.
+
+
+Additionally, we use stacking to create ensemble of base learners using a meta-classifier~\cite{wolpert1992stacked}.
+\ac{adb} and \ac{gb} are chosen as meta-classifiers to aggregate the base learners in the stacking strategies.
+

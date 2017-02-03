@@ -1,0 +1,69 @@
+\documentclass[conference,twocolumn,letterpaper,10pt]{IEEEtran}
+
+%%% Packages
+% \usepackage{array}
+% \usepackage{amsmath}
+% \usepackage{fancyhdr}
+% \usepackage{graphicx}
+% \usepackage{float}
+% \usepackage[LGRgreek]{mathastext}
+% \usepackage{lipsum}
+% \usepackage{multirow}
+% \usepackage{subfigure}
+% \usepackage{url}
+% \usepackage{varwidth,xcolor}
+% \usepackage{tikz,xifthen}
+% \usepackage{tikz-qtree}
+% \usetikzlibrary{decorations.pathmorphing}
+% \usetikzlibrary{fit}
+% \usetikzlibrary{backgrounds}
+% \usetikzlibrary{shapes,arrows,shadows}
+% \usetikzlibrary{calc,decorations.pathreplacing,decorations.markings,positioning}
+% \usetikzlibrary{snakes,decorations.text,shapes,patterns}
+
+\input{package}
+
+% Include acroyms
+\usepackage{acro}
+\input{acronym_definition.tex}
+
+%%% Document
+\begin{document}
+
+\input{frontmatter.tex}
+
+\maketitle
+%\thispagestyle{plain}
+%\pagestyle{plain}
+
+% Abstract
+\begin{abstract}
+\ac{cap} is the second most diagnosed cancer in men all over the world.
+In the last decades, new imaging techniques based on \ac{mri} have been developed improving diagnosis.
+In practise, diagnosis can be affected by multiple factors such as observer variability and visibility and complexity of the lesions.
+In this regard, \ac{cad} systems are being designed to help radiologists in their clinical practice.
+We propose a \ac{cad} system taking advantage of all MRI modalities (i.e., \acs*{t2w}-\acs*{mri}, \acs*{dce}-\acs*{mri}, DW-\acs*{mri}, \acs*{mrsi}).
+This system has been extensively tested on a dataset which has been made publicly available.
+\end{abstract}
+
+% Key words
+\begin{IEEEkeywords}
+Computer-Aided Diagnosis, Prostate Cancer, normalization, Multi-parametric MRI
+\end{IEEEkeywords}
+\IEEEpeerreviewmaketitle
+\acresetall
+% Sections
+\input{Sections/intro.tex}
+% \input{Sections/StateOfTheArt.tex}
+% \input{Sections/Experiments.tex}
+\input{Sections/method.tex}
+\input{Sections/ResultsAndEvaluation.tex}
+\input{Sections/discussion.tex}
+% \input{Sections/FinalRemarks.tex}
+% \input{Sections/aknowledgments.tex}
+
+% Bibliography
+\bibliographystyle{unsrt}
+\bibliography{Bibliography}
+
+\end{document}
