@@ -1,40 +1,53 @@
 \section{Introduction}
-Current \ac{cap} screening consists of three different stages.
+Current \ac{cap} screening consists of 3 different stages.
 First, \ac{psa} control is performed to distinguish between low- and
 high-risk \ac{cap}.
 To assert such diagnosis, samples are taken during prostate biopsy and
-finally analyzed to evaluate the prognosis and the stage of \ac{cap}.
+analyzed to make an accurate prognosis of the \ac{cap}.
 
 Although \ac{psa} screening has been shown to improve early detection
 of \ac{cap}~\cite{Chou2011}, its lack of reliability motivates further
 investigations using \ac{mri}-based \ac{cad}.
-Current research is focused on identifying new biological markers to
-replace \ac{psa}-based
-screening~\cite{Bourdoumis2010,Morgan2011,Brenner2013}.
+Consequently, current research is focused on identifying new
+biological markers to replace \ac{psa}-based
+screening~\cite{Brenner2013}.
 Until such research comes to fruition, these needs can be met through
 active-surveillance strategy using \ac{mpmri}
-techniques~\cite{Hoeks2011,Moore2013}.
+techniques~\cite{Moore2013}.
 
 %A general \ac{cad} work-flow is presented in \acs{fig}\,\ref{fig:wkfcad}.
 %The \ac{cad} work-flow is presented in \acs{fig}~\ref{fig:wkfcad}.
-In a recent paper, Lemaitre et al. ~\cite{Lemaitre2015} reviewed
-around fifty papers recently published and focusing on CAD system for
-CaP. Most of the work reviewed could fit on the pipeline presented in
-~\cite{Lemaitre2016thesis}which consists of  different steps:
-pre-processing, segmentation, registration, feature detection, feature
-balancing, feature selection/extraction, and finally classification.
-However, non of the reviewed work, except thisone used all the
-\ac{mri} modalities (\ac{t2w}, \ac{dce},\ac{dw} and \ac{mrsi}) and
-only half of the studies were related to the central gland of the
-prostate.
+Lemaitre\,\emph{et~al.} recently reviewed
+more than 50 research works that focused on \ac{cad} system for
+\ac{cap}~\cite{Lemaitre2015}.
+These studies are based on \ac{cad} systems that consists of the
+following steps:
+(i) pre-processing,
+(ii) segmentation,
+(iii) registration,
+(iv) feature detection,
+%(v) feature balancing,
+(v) feature selection-extraction, and
+(vi) finally classification.
 
+The reviewed \ac{mpmri}-based \ac{cad} used 2 to 3
+\ac{mri} modalities among \ac{t2w}-\ac{mri}, \ac{dce}-\ac{mri}, and
+\ac{dw}-\ac{mri}, discarding the potential discriminative power of
+\ac{mrsi}.
+Furthermore, only half of these studies tackled the challenging
+detection of \ac{cap} in the \ac{cg}.
+Additionally, none of the works investigated the issue related to
+feature balancing when developing their \ac{cad} systems.
+Finally, none of the datasets nor source codes used have been
+released, making impossible the possibilities to compare the methods.
 
 %In \iac{cade} framework, \textit{possible lesions are segmented
 %automatically} and further used as input of \iac{cadx}.
 %Nevertheless, some works also used a fusion of \ac{cade}-\ac{cadx}
 %framework in which a voxel-based features are directly used, in which
 %the location of the malignant lesions are obtained as results.
-%On the other hand, manual lesions segmentation is not considered to be part of \ac{cade}.
+%On the other hand, manual lesions segmentation is not considered to
+%be part of \ac{cade}.
 %The output of the \ac{cade} is used as input of the \ac{cadx}.
 
 %$\Ac{cadx} is composed of the processes allowing to
@@ -45,3 +58,10 @@ prostate.
 %composed of the three common steps used in a classification
 %framework: (i) features detection, (ii) feature extraction/selection,
 %and (iii) feature classification.
+
+In this work, we propose a \ac{cad} system to detect \ac{cap} in
+\ac{pz} and \ac{cg}, using the 4 aformentioned \ac{mri}
+modalities.
+In addition, our framework include a step of feature balancing.
+The dataset used and the source code developed are released for future
+comparisons and reproducibility.

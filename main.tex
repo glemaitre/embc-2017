@@ -1,4 +1,4 @@
-\documentclass[conference,twocolumn,letterpaper,10pt]{IEEEtran}
+\documentclass[conference]{IEEEtran}
 
 %%% Packages
 % \usepackage{array}
@@ -38,17 +38,17 @@
 
 % Abstract
 \begin{abstract}
-\ac{cap} is the second most diagnosed cancer in men all over the world.
+\Ac{cap} is the second most diagnosed cancer in men all over the world.
 In the last decades, new imaging techniques based on \ac{mri} have been developed improving diagnosis.
-In practise, diagnosis can be affected by multiple factors such as observer variability and visibility and complexity of the lesions.
+In practice, diagnosis is affected by multiple factors such as observer variability and visibility and complexity of the lesions.
 In this regard, \ac{cad} systems are being designed to help radiologists in their clinical practice.
-We propose a \ac{cad} system taking advantage of all MRI modalities (i.e., \acs*{t2w}-\acs*{mri}, \acs*{dce}-\acs*{mri}, DW-\acs*{mri}, \acs*{mrsi}).
+We propose a \ac{cad} system taking advantage of all MRI modalities (i.e., \acs*{t2w}-\acs*{mri}, \acs*{dce}-\acs*{mri}, \ac{dw}-\acs*{mri}, \acs*{mrsi}).
 This system has been extensively tested on a dataset which has been made publicly available.
 \end{abstract}
 
 % Key words
 \begin{IEEEkeywords}
-Computer-Aided Diagnosis, Prostate Cancer, normalization, Multi-parametric MRI
+Computer-Aided Diagnosis, Prostate Cancer, Normalization, Multi-Parametric MRI
 \end{IEEEkeywords}
 \IEEEpeerreviewmaketitle
 \acresetall
@@ -63,7 +63,8 @@ Computer-Aided Diagnosis, Prostate Cancer, normalization, Multi-parametric MRI
 % \input{Sections/aknowledgments.tex}
 
 % Bibliography
-\bibliographystyle{unsrt}
+\bibliographystyle{IEEEtran}
+%\IEEEtriggeratref{10}
 \bibliography{Bibliography}
 
 \end{document}
