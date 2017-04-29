@@ -71,7 +71,7 @@ techniques~\cite{Moore2013}.
 Lemaitre\,\emph{et~al.} recently reviewed
 more than 50 research works that focused on \ac{cad} system for
 \ac{cap}~\cite{Lemaitre2015}.
-These studies are based on \ac{cad} systems that consists of the
+These studies are based on \ac{cad} systems that consist of the
 following steps:
 (i) pre-processing,
 (ii) segmentation,
@@ -92,7 +92,7 @@ Finally, none of the datasets nor source codes used have been
 released, making impossible the possibilities to compare the methods.
 
 In this work, we propose a \ac{cad} system to detect \ac{cap} in
-\ac{pz} and \ac{cg}, using the 4 aformentioned \ac{mri}
+\ac{pz} and \ac{cg}, using the 4 aforementioned \ac{mri}
 modalities.
 The ultimate goal of the current \ac{cad} system is to provide a probabilistic
 map of the cancer within the prostate.
@@ -113,9 +113,9 @@ sequences to obtain \ac{t2w}-\ac{mri}, \ac{dce}-\ac{mri},
 \ac{dw}-\ac{mri}, and \ac{mrsi}.
 In addition of the \ac{mri} examination, these patients also have undergone
 a \ac{trus} guided-biopsy.
-The dataset is composed of 17 of which have biopsies that were positive for
+The dataset is composed of 17 which all have biopsies that were positive for
 \ac{cap}.
-In all 12 patients have a \ac{cap} in the \ac{pz}, 3 patients
+From those 12 patients have a \ac{cap} in the \ac{pz}, 3 patients
 have \ac{cap} in the \ac{cg}, 2 patients have invasive \ac{cap} in
 both the \ac{pz} and the \ac{cg}.
 An experienced radiologist segmented the prostate organ --- on
@@ -241,21 +241,20 @@ python package~\cite{imblearn}.
 
 Feature selection and extraction are used in our experiment.
 \ac{mrsi} and \ac{dce}-\ac{mri} are decomposed using three feature
-extraction methods: \ac{pca}, sparse-\ac{pca}, and \ac{ica} are used
-to decompose signal-based data.
+extraction methods: \ac{pca}, sparse-\ac{pca}, and \ac{ica}.
 Additionally to feature extraction, two methods of feature selection
 are used: (i) the one-way \ac{anova} and (ii) the Gini importance
 obtained while learning the \ac{rf} classifiers.
 The \texttt{scikit-learn}\footnote{\url{http://scikit-learn.org/stable/}}
-python package provides all those methods and was use in our
+python package provides all those methods and was used in our
 experiment~\cite{pedregosa2011scikit}.
 
 \subsubsection{Classification}\label{subsec:chp6:method:clas}
 
 \ac{rf} has been chosen as our base classifier to perform classification of
 individual modality as well as the combination of modalities.
-\ac{rf} and more generally decision trees do not required to scale features and
-provide a feature selection add-on by analyzing the feature importance derived
+\ac{rf} and decision trees do not require to scale features and
+provide feature selection by analyzing the feature importance, derived
 from the impurity improvement successive splits.
 Additionally, we use stacking to create ensemble of base learners using a
 meta-classifier~\cite{wolpert1992stacked}, namely \ac{adb} and \ac{gb}.
@@ -297,13 +296,13 @@ We found that once all features are concatenated together,
 \ac{nm3}~\cite{mani2003knn} is the method providing the best
 enhancement of the classification performance with an \ac{auc} of $0.824 \pm
 0.076$.
-Therefore, with this optimal balancing, were here report the
+Therefore, with this optimal balancing, we here report the
 final step consisting of three strategies:
 (i) the selected features from each modality (i.e., 331 features) are
 concatenated together and used in a \ac{rf} classifier,
 (ii) the selected features from each modality (i.e., 331 features) are
 used to train a stacking classifier with a \ac{gb} as meta-classifier, and
-(iii) the selected features from the concatenated set of feature
+(iii) the selected features from the concatenated set of features
 (i.e., 267 features) are used to train a single \ac{rf} classifier.
 
 The selected features are presented in Table~\ref{tab:selfeatocc} which
@@ -348,7 +347,7 @@ The improvement in terms of \ac{auc} is of $0.028$ and $0.050$
 compared with the 1\textsuperscript{st} and 2\textsuperscript{nd}
 configurations, respectively.
 
-In clinical setting, the \ac{auc} score is categorized in 3 levels:
+In a clinical setting, the \ac{auc} score is categorized in 3 levels:
 (i) ``acceptable'' discrimination for an \ac{auc} ranging from $0.7$
 to $0.8$, (ii) ``excellent'' discrimination for an \ac{auc} ranging
 from $0.8$ to $0.9$, and ``outstanding'' discrimination when the
@@ -374,6 +373,8 @@ we obtained results on a rather complicated dataset of 17 patients
 with an average \ac{auc} of $0.836 \pm 0.083$ which put our system in the
 state-of-the-art, even so different \ac{cad}s were tested on different
 datasets.
+In addition, we released the source code and the dataset allowing for
+reproducibility.
 
 As avenues for future research, one could switch from voxel-based
 classification to super-voxel classification such that spatial structure are
